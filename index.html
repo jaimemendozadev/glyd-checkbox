@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+          monospace;
+      }
+      
+      .box-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .box {
+        width: 80%;
+        height: 100px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-bottom: 1em;
+        font-size: 5em;
+      }
+      
+      .visible {
+        visibility: visible;
+      }
+      
+      .hidden {
+        visibility: hidden;
+      }
+      
+      form {
+        margin-bottom: 1.5em;
+      }
+    
+    </style>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.3.1/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.3.1/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    
+</head>
+<body>
+    <div class="container"></div>
+
+    
+    <script type="text/babel">
+        const {Component} = React;
+
+        console.log('ReactDOM is ', ReactDOM)
+
+      const defaultState = {
+        toggleFoo: true,
+        toggleBar: false
+      }
+      
+      class App extends Component {
+        constructor(props){
+          super(props);
+          this.state = defaultState
+        }
+      
+        toggleDiv = event => {
+          const {toggleFoo, toggleBar} = this.state;
+          this.setState({
+            toggleFoo: !toggleFoo,
+            toggleBar: !toggleBar
+          })
+        }
+      
+        checkToggledClass = currentStatus => {
+      
+          return currentStatus === true ? "visible" : "hidden";
+        }
+      
+        render() {
+          const {toggleFoo, toggleBar} = this.state;
+          return (
+            <div className="App">
+              <h1>GLYD Checkbox System</h1>
+              <form>
+                <label>
+                  <input onClick={this.toggleDiv} type="checkbox" />
+                  Click to Toggle Boxes
+                </label>
+              </form>
+      
+              <div className="box-container">
+                <div id="foo" className={`box ${this.checkToggledClass(toggleFoo)}`}>Foo</div>
+                <div id="bar" className={`box ${this.checkToggledClass(toggleBar)}`}>Bar</div>
+              </div>
+      
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.querySelector('.container'))
+  
+  </script>
+    
+</body>
+</html>
